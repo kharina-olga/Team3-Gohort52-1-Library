@@ -10,3 +10,4 @@ public interface UserRepository {
 
     User getUserByEmail(String email);
 }
+

@@ -7,7 +7,6 @@ import utils.MyList;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 public class UserRepositoryImpl implements UserRepository {
 
     private final MyList<User> users;
