@@ -3,12 +3,8 @@ package view;
 import java.util.Scanner;
 
 public class Menu {
-    //private final MainService service;
     private final Scanner scanner = new Scanner(System.in);
 
-//    public Menu(MainService service) {
-//        this.service = service;
-//    }
 
     public void run() {
         showMenu();
@@ -16,8 +12,6 @@ public class Menu {
 
     private void showMenu() {
         while (true) {
-            System.out.println(Color.GREEN + "Добро пожаловать в библиотеку" + Color.RESET);
-            System.out.println("1. Меню библиотеки");
             System.out.println("2. Меню пользователей");
             System.out.println("3. Меню администратора");
             System.out.println("0. Выход из системы");
@@ -40,7 +34,6 @@ public class Menu {
         switch (choice) {
             case 1:
                 //Todo
-                System.out.println("Список всех книг");
                 // showCarMenu();
                 break;
             case 2:
@@ -91,20 +84,12 @@ public class Menu {
                 System.out.println("Введите пароль");
                 String password = scanner.nextLine();
 
-//                User user = service.registerUser(email, password);
-//
-//                if (user != null) {
-//                    System.out.println("Вы успешно зарегистрировались в системе");
-//                } else {
-//                    System.out.println("Регистрация провалена!");
-//                }
 
                 waitRead();
 
                 break;
             case 3:
                 // logout
-                //service.logout();
                 System.out.println("Вы вышли из системы");
                 waitRead();
                 break;

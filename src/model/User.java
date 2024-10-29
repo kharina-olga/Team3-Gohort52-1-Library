@@ -8,20 +8,15 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private final MyList<Book>  userBooks;
 
-    public User(String password, String email) {
         this.password = password;
-        this.email = email;
         this.role = Role.USER;
-        this.userBooks = new MyArrayList<>();
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
-                ", userBooks=" + userBooks +
                 '}';
     }
 
@@ -41,15 +36,5 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public MyList<Book> getUserBooks() {
-        return userBooks;
     }
 }
