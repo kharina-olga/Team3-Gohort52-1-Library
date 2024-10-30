@@ -51,12 +51,19 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public MyList<Book> getAllBooks() {
-        return null;
+        return books;
     }
 
     @Override
     public MyList<Book> getAvailableBooks() {
-        return null;
+        MyList<Book> result = new MyArrayList<>();
+
+        for (Book book : books) {
+            if (book.isAvailable()) {
+                result.add(book);
+            }
+        }
+        return result;
     }
 
     @Override
