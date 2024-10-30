@@ -64,4 +64,7 @@ public class Book {
         isAvailable = available;
     }
 
+    public Object getBorrowedBy() {
+        return null;
+    }
 }
