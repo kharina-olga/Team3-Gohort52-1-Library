@@ -27,4 +27,6 @@ public interface BookRepository {
 
     // Получить список всех книг на руках
     MyList<Book> getBorrowedBooks();
+
+    void deleteCar(Book book);
 }

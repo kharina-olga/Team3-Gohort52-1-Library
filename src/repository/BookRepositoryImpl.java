@@ -61,6 +61,21 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public MyList<Book> getBorrowedBooks() {
-        return null;
+        MyList<Book> result = new MyArrayList<>();
+
+
+        for (Book book : books) {
+            if (!book.isAvailable()) {
+                result.add(book);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void deleteCar(Book book) {
+        books.remove(book);
     }
 }
+
+
