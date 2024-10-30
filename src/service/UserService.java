@@ -1,10 +1,26 @@
 package service;
 
+import model.Book;
+import model.User;
+import utils.MyList;
+
 public interface UserService {
 
-    void registerUser();
-    void getUsers();
-    void login();
-    void getUsersBooks();
+    User registerUser(String email, String password);
+
+    MyList<User> getUsers(String email);
+
+    User getUser(String email);
+
+    boolean loginUser(String email, String password);
+
+
+    MyList<Book> getUsersBooks(String title);
+
+
+    MyList<Book> getAllBooksByUser();
+
+    void logout();
 
 }
+

@@ -8,6 +8,7 @@ public class User {
     private String email;
     private String password;
     private Role role;
+    private MyList<Book> borrowedBooks; // Список взятых книг
     private final MyList<Book>  userBooks;
 
     public User(String password, String email) {

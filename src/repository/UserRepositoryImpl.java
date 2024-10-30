@@ -1,5 +1,6 @@
 package repository;
 
+import model.Book;
 import model.Role;
 import model.User;
 import utils.MyArrayList;
@@ -11,8 +12,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     private final MyList<User> users;
     private final AtomicInteger usersCount = new AtomicInteger(1);
+    private final BookRepository bookRepository;
 
-    public UserRepositoryImpl() {
+    public UserRepositoryImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
         users = new MyArrayList<>();
         addUsers();
     }
@@ -52,4 +55,29 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return null;
     }
+
+    @Override
+    public MyList<User> getAllUsers() {
+        return users;
+    }
+
+    // Метод вернет список книг, взятых пользователем
+    @Override
+    public MyList<Book> getBooksByUser(User user) {
+        MyList<Book> userBooks = new MyArrayList<>();
+
+        for (Book book : bookRepository.getBorrowedBooks()) {
+            if (book.getBorrowedBy() != null && book.getBorrowedBy().equals(user)) {
+                userBooks.add(book);
+            }
+        }
+        return userBooks;
+    }
+
+    @Override
+    public MyList<Book> getAllBooks(User activeUser) {
+        return null;
+    }
+
+
 }
