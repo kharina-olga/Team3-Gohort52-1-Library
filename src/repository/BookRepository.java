@@ -17,7 +17,7 @@ public interface BookRepository {
     void addBook(int id, String title, String author);
 
     // Посмотреть книгу по айди
-    void getBookById(int id);
+    Book getBookById(int id);
 
     // Получить список всех книг
     MyList<Book> getAllBooks();

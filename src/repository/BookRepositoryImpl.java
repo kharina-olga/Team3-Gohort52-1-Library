@@ -19,7 +19,7 @@ public class BookRepositoryImpl implements BookRepository {
         addBooks();
     }
 
-    private void addBooks(){
+    private void addBooks() {
         books.addAll(
                 new Book(currentId.getAndIncrement(), "To Kill a Mockingbird", "Harper Lee"),
                 new Book(currentId.getAndIncrement(), "1984", "George Orwell"),
@@ -37,12 +37,16 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public void addBook(int id, String title, String author) {
-
+        Book book = new Book(id, title, author);
+        books.add(book);
     }
 
     @Override
-    public void getBookById(int id) {
-
+    public Book getBookById(int id) {
+        for (Book book : books) {
+            if (book.getId() == id) return book;
+        }
+        return null;
     }
 
     @Override
