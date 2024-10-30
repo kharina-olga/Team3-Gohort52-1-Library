@@ -1,14 +1,17 @@
 package view;
 
+import model.User;
+import service.UserService;
+
 import java.util.Scanner;
 
 public class Menu {
-    //private final MainService service;
+    private final UserService service;
     private final Scanner scanner = new Scanner(System.in);
 
-//    public Menu(MainService service) {
-//        this.service = service;
-//    }
+    public Menu(UserService service) {
+        this.service = service;
+    }
 
     public void run() {
         showMenu();
@@ -23,7 +26,7 @@ public class Menu {
             System.out.println("0. Выход из системы");
             System.out.println(Color.YELLOW + "\nВведите пункт меню:" + Color.RESET);
 
-            int choice = scanner.nextInt();
+            int choice = getInt();
             scanner.nextLine();
 
             if (choice == 0) {
@@ -39,19 +42,43 @@ public class Menu {
     private void showSubMenu(int choice) {
         switch (choice) {
             case 1:
-                //Todo
-                System.out.println("Список всех книг");
-                // showCarMenu();
+                showBookMenu();
                 break;
             case 2:
                 showUserMenu();
                 break;
             case 3:
-                //Todo
-                // showAdminMenu();
+                 showAdminMenu();
                 break;
             default:
                 System.out.println(Color.RED + "Сделайте корректный выбор\n" + Color.RESET);
+        }
+    }
+
+
+    private void showBookMenu() {
+        while (true) {
+            System.out.println(Color.GREEN + "Меню библиотеки" + Color.RESET);
+            System.out.println("1. Список всех книг");
+            System.out.println("2. Поиск книги по названию");
+            System.out.println("3. Список всех свободных книг");
+            System.out.println("4. Список всех книг, находящихся сейчас у читателей");
+
+            //////////////////////
+            System.out.println("4. Взятие книги из библиотеки");
+            System.out.println("5. Возврат книги в библиотеку");
+            System.out.println("6. Добавление книги");
+
+            System.out.println("0. Вернуться в предыдущее меню");
+
+            System.out.println("\nСделайте выбор пункта меню");
+            int input = getInt();
+            scanner.nextLine();
+            // прервать текущий цикл
+            if (input == 0) break;
+
+            cubBookMenu(input);
+
         }
     }
 
@@ -64,13 +91,57 @@ public class Menu {
             System.out.println("0. Вернуться в предыдущее меню");
 
             System.out.println("\nСделайте выбор пункта меню");
-            int input = scanner.nextInt();
+            int input = getInt();
             scanner.nextLine();
-            // прервать текущий цикл
             if (input == 0) break;
 
             handleUserMenuChoice(input);
 
+        }
+    }
+
+    private void showAdminMenu() {
+        while (true) {
+            System.out.println(Color.GREEN + "Меню администратора" + Color.RESET);
+            System.out.println("1. Вход в систему");
+            System.out.println("2. Регистрация нового администратора");
+            System.out.println("3. Logout");
+            System.out.println("0. Вернуться в предыдущее меню");
+
+            System.out.println("\nСделайте выбор пункта меню");
+            int input = getInt();
+            scanner.nextLine();
+            if (input == 0) break;
+
+            handleUserMenuChoice(input);
+
+        }
+    }
+
+    private void cubBookMenu(int input) {
+        switch (input) {
+            case 1:
+                System.out.println("1. Список всех книг");
+                //todo
+                waitRead();
+                break;
+            case 2:
+                System.out.println("Поиск книги по названию");
+                //todo
+                waitRead();
+                break;
+            case 3:
+                System.out.println(" Список всех свободных книг");
+                //todo
+                waitRead();
+                break;
+            case 4:
+                System.out.println(" Список всех книг, находящихся сейчас у читателей");
+                //todo
+                waitRead();
+                break;
+            default:
+                System.out.println("\nНе верный ввод");
         }
     }
 
@@ -79,20 +150,24 @@ public class Menu {
             case 1:
                 //Авторизацию
                 //Todo написать авторизацию
-                System.out.println("Метод в разработке. Приходите завтра");
+                System.out.println("Введите email:");
+                String email = scanner.nextLine();
+
+                System.out.println("Введите пароль");
+                String password = scanner.nextLine();
                 waitRead();
                 break;
             case 2:
                 // Регистрацию
                 System.out.println("Регистрация нового пользователя");
                 System.out.println("Введите email:");
-                String email = scanner.nextLine();
+                String email1 = scanner.nextLine();
 
                 System.out.println("Введите пароль");
-                String password = scanner.nextLine();
+                String password1 = scanner.nextLine();
 
-//                User user = service.registerUser(email, password);
-//
+                //User user = service.registerUser(email, password);
+
 //                if (user != null) {
 //                    System.out.println("Вы успешно зарегистрировались в системе");
 //                } else {
@@ -103,7 +178,7 @@ public class Menu {
 
                 break;
             case 3:
-                // logout
+                System.out.println("logout");
                 //service.logout();
                 System.out.println("Вы вышли из системы");
                 waitRead();
@@ -118,4 +193,19 @@ public class Menu {
         scanner.nextLine();
     }
 
+    public int getInt() {
+
+        int num;
+        if (scanner.hasNextInt()) {
+
+            num = scanner.nextInt();
+        } else {
+
+            System.out.println(Color.RED + "Вы допустили ошибку при вводе. Попробуйте еще раз." + Color.RESET);
+            scanner.next();//рекурсия
+            //showMenu();
+            num = getInt();
+        }
+        return num;
+    }
 }
