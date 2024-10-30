@@ -73,7 +73,7 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void deleteCar(Book book) {
+    public void deleteBook(Book book) {
         books.remove(book);
     }
 }
