@@ -21,24 +21,24 @@ public class BookRepositoryImpl implements BookRepository {
 
     private void addBooks() {
         books.addAll(
-                new Book(currentId.getAndIncrement(), "To Kill a Mockingbird", "Harper Lee"),
-                new Book(currentId.getAndIncrement(), "1984", "George Orwell"),
-                new Book(currentId.getAndIncrement(), "Pride and Prejudice", "Jane Austen"),
-                new Book(currentId.getAndIncrement(), "The Great Gatsby", "F. Scott Fitzgerald"),
-                new Book(currentId.getAndIncrement(), "Moby-Dick", "Herman Melville"),
-                new Book(currentId.getAndIncrement(), "The Catcher in the Rye", "J.D. Salinger"),
-                new Book(currentId.getAndIncrement(), "The Hobbit", "J.R.R. Tolkien"),
-                new Book(currentId.getAndIncrement(), "War and Peace", "Leo Tolstoy"),
-                new Book(currentId.getAndIncrement(), "Crime and Punishment", "Fyodor Dostoevsky"),
-                new Book(currentId.getAndIncrement(), "The Odyssey", "Homer")
+                new Book(currentId.getAndIncrement(), "To Kill a Mockingbird", "Harper Lee", 1960),
+                new Book(currentId.getAndIncrement(), "1984", "George Orwell", 1949),
+                new Book(currentId.getAndIncrement(), "Pride and Prejudice", "Jane Austen", 1813),
+                new Book(currentId.getAndIncrement(), "The Great Gatsby", "F. Scott Fitzgerald", 1925),
+                new Book(currentId.getAndIncrement(), "Moby-Dick", "Herman Melville", 1851),
+                new Book(currentId.getAndIncrement(), "The Catcher in the Rye", "J.D. Salinger", 1951),
+                new Book(currentId.getAndIncrement(), "The Hobbit", "J.R.R. Tolkien", 1937),
+                new Book(currentId.getAndIncrement(), "War and Peace", "Leo Tolstoy", 1869),
+                new Book(currentId.getAndIncrement(), "Crime and Punishment", "Fyodor Dostoevsky", 1866),
+                new Book(currentId.getAndIncrement(), "The Odyssey", "Homer", -800) // предполагаемое написание в 8 веке до н.э.
         );
 
     }
 
+
     @Override
-    public void addBook(int id, String title, String author) {
-        Book book = new Book(id, title, author);
-        books.add(book);
+    public void addBook(int id, String title, String author, int publicationYear) {
+
     }
 
     @Override

@@ -14,7 +14,7 @@ import utils.MyList;
 public interface BookRepository {
 
     // Добавить новую книгу
-    void addBook(int id, String title, String author);
+    void addBook(int id, String title, String author, int publicationYear);
 
     // Посмотреть книгу по айди
     Book getBookById(int id);

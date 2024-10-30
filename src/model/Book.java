@@ -12,7 +12,7 @@ public class Book {
     private LocalDate borrowedDate; // Добавлено поле даты взятия книги
 
 
-    public Book(int id, String title, String author, boolean isAvailable, int publicationYear) {
+    public Book(int id, String title, String author, int publicationYear) {
         this.id = id;
         this.title = title;
         this.author = author;
