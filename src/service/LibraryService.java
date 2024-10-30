@@ -1,17 +1,21 @@
 package service;
+import model.Book;
+import utils.MyList;
 
 public interface LibraryService {
 
     void getByAuthor();
 
-    void addBook();
+    void addBook(int id, String title, String author);
 
-    void getAllBooks();
+    MyList<Book> getAllBooks();
 
-    void getAllFreeBooks();
+    MyList<Book> getAllFreeBooks();
 
-    void getAllBorrowedBooks();
-    void borrowBook();
+    MyList<Book> getAllBorrowedBooks();
+
+    boolean borrowBook(int id);
+
     void returnBook();
     void editBook();
 }
