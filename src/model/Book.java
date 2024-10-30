@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Book {
@@ -7,12 +8,16 @@ public class Book {
     private final String title;
     private final String author;
     private boolean isAvailable;
+    private final int publicationYear; // Добавлено поле года издания
+    private LocalDate borrowedDate; // Добавлено поле даты взятия книги
 
-    public Book(int id, String title, String author) {
+
+    public Book(int id, String title, String author, boolean isAvailable, int publicationYear) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.isAvailable = true;
+        this.isAvailable = isAvailable;
+        this.publicationYear = publicationYear;
     }
 
     @Override
@@ -56,6 +61,8 @@ public class Book {
         return author;
     }
 
+    public int getPublicationYear() { return publicationYear; }
+
     public boolean isAvailable() {
         return isAvailable;
     }
@@ -67,4 +74,11 @@ public class Book {
     public Object getBorrowedBy() {
         return null;
     }
+
+    public LocalDate getBorrowedDate() { return borrowedDate; }
+
+    public void setBorrowedDate(LocalDate borrowedDate) {
+        this.borrowedDate = borrowedDate;
+    }
+
 }
