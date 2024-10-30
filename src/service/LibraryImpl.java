@@ -29,7 +29,7 @@ public class LibraryImpl implements LibraryService{
     public void addBook(int id, String title, String author) {
         // Проверка роли текущего пользователя
         if (activeUser == null || activeUser.getRole() != Role.ADMIN) {
-            System.out.println("Добавление нового автомобиля доступно только Администраторам");
+            System.out.println("Добавление новой книги доступно только Администраторам");
             return;
         }
         if (title!=null && author!=null) {
