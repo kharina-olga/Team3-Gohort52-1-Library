@@ -28,5 +28,9 @@ public interface BookRepository {
     // Получить список всех книг на руках
     MyList<Book> getBorrowedBooks();
 
+    // Удалить книгу из списка всех книг
     void deleteBook(Book book);
+
+    // Найти книгу по её названию
+    Object getBookByTitle(String title);
 }
