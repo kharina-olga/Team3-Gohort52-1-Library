@@ -68,7 +68,7 @@ public class MyArrayList<T> implements MyList<T>, Iterable<T> {
 
     // Динамическое расширение массива
     private void expandArray() {
-        System.out.println("Расширяем массив! Курсор = " + cursor);
+        //System.out.println("Расширяем массив! Курсор = " + cursor);
         /*
         1. создать новый массив бОльшего размера (в 2 раза больше)
         2. Переписать в новый массив все значения из старого (до курсора)
@@ -85,7 +85,7 @@ public class MyArrayList<T> implements MyList<T>, Iterable<T> {
 
         // Перебрасываем ссылку. Переменная array хранит ссылку на "новый" массив
         array = newArray;
-        System.out.println("Расширение массива завершено");
+        //System.out.println("Расширение массива завершено");
     }
 
     // Возвращает строковое представление массива

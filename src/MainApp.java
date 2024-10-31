@@ -14,7 +14,7 @@ public class MainApp {
     public static void main(String[] args) {
 
         BookRepository bookRepository = new BookRepositoryImpl();
-        UserRepository userRepository = new UserRepositoryImpl(bookRepository);
+        UserRepository userRepository = new UserRepositoryImpl();
 
         UserService serviceUser = new UserImpl(userRepository);
         LibraryService serviceBook = new LibraryImpl(bookRepository,userRepository);

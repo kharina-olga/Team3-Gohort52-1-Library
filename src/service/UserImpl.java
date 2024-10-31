@@ -38,9 +38,6 @@ public class UserImpl implements UserService{
     }
 
 
-
-
-
     @Override
     public boolean loginUser(String email, String password) {
         User user = repositoryUser.getUserByEmail(email);
@@ -73,8 +70,15 @@ public class UserImpl implements UserService{
         return filteredUsers; // Возвращаем отфильтрованный список
     }
 
+    //возвращает юзера по имейлу
     @Override
     public User getUser(String email) {
+        MyList<User> allUsers = repositoryUser.getAllUsers();
+        for (User user: allUsers) {
+            if (user.getEmail().equals(email)) {
+                return user;
+            }
+        }
         return null;
     }
 
