@@ -11,9 +11,9 @@ public class User {
     private MyList<Book> borrowedBooks; // Список взятых книг
     private final MyList<Book>  userBooks;
 
-    public User(String password, String email) {
-        this.password = password;
+    public User(String email, String password) {
         this.email = email;
+        this.password = password;
         this.role = Role.USER;
         this.userBooks = new MyArrayList<>();
     }
