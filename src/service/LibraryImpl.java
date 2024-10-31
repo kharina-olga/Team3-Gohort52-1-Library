@@ -69,6 +69,7 @@ public class LibraryImpl implements LibraryService{
         return null;
     }
 
+    //одолжить книгу
     @Override
     public boolean borrowBook(int id) {
         // Проверка, что пользователь авторизирован в системе
@@ -85,15 +86,34 @@ public class LibraryImpl implements LibraryService{
         Book book = bookRepository.getBookById(id);
         if(id!=0 && book.isAvailable()) {
             activeUser.getUserBooks().add(book);
+            book.setAvailable(false);
+            return true;
+        }
+
+        return false;
+    }
+
+    //вернуть книгу
+    @Override
+    public boolean returnBook(int id) {
+        // Проверка, что пользователь авторизирован в системе
+        if (activeUser == null) {
+            System.out.println("Выполните вход в систему");
             return false;
         }
 
-        return true;
-    }
+        if (activeUser.getRole() == Role.BLOCKED) {
+            System.out.println("Ваш аккаунт заблокирован! Обратитесь в службу поддержки");
+            return false;
+        }
 
-    @Override
-    public void returnBook() {
-
+        Book book = bookRepository.getBookById(id);
+        if(id!=0 && activeUser.getUserBooks().contains(book)) {
+            activeUser.getUserBooks().remove(book);
+            book.setAvailable(true);
+            return true;
+        }
+        return false;
     }
 
     @Override
