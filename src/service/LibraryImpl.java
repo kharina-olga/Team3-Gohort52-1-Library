@@ -7,7 +7,7 @@ import repository.BookRepository;
 import repository.UserRepository;
 import utils.MyList;
 
-public class LibraryImpl implements LibraryService{
+public class LibraryImpl implements LibraryService {
 
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
@@ -15,9 +15,10 @@ public class LibraryImpl implements LibraryService{
     private MyList<Book> books;
 
     private User activeUser;
+
     public LibraryImpl(BookRepository bookRepository, UserRepository userRepository) {
-        this.bookRepository=bookRepository;
-        this.userRepository=userRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -26,15 +27,17 @@ public class LibraryImpl implements LibraryService{
     }
 
     @Override
-    public void addBook(int id, String title, String author) {
+    public void addBook(int id, String title, String author, int publicationYear) {
         // Проверка роли текущего пользователя
         if (activeUser == null || activeUser.getRole() != Role.ADMIN) {
             System.out.println("Добавление новой книги доступно только Администраторам");
             return;
         }
-        if (title!=null && author!=null) {
-            Book book=new Book(id, title, author);
+        if (title != null && author != null && publicationYear != 0) {
+            Book book = new Book(id, title, author, publicationYear);
             books.add(book);
+        } else {
+            System.out.println("Некорректные данные для добавления книги");
         }
     }
 
@@ -70,7 +73,7 @@ public class LibraryImpl implements LibraryService{
         }
 
         Book book = bookRepository.getBookById(id);
-        if(id!=0 && book.isAvailable()) {
+        if (id != 0 && book.isAvailable()) {
             activeUser.getUserBooks().add(book);
             return false;
         }

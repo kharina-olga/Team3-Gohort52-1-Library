@@ -6,7 +6,7 @@ public interface LibraryService {
 
     void getByAuthor();
 
-    void addBook(int id, String title, String author);
+    void addBook(int id, String title, String author, int publicationYear );
 
     MyList<Book> getAllBooks();
 
