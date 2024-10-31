@@ -8,17 +8,16 @@ import repository.UserRepository;
 import utils.MyArrayList;
 import utils.MyList;
 
-public class LibraryImpl implements LibraryService{
+public class LibraryImpl implements LibraryService {
 
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
-    private MyList<Book> books;
-
     private User activeUser;
+
     public LibraryImpl(BookRepository bookRepository, UserRepository userRepository) {
-        this.bookRepository=bookRepository;
-        this.userRepository=userRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -26,16 +25,22 @@ public class LibraryImpl implements LibraryService{
         System.out.println("Test");
     }
 
+    // Метод, который принимает данные от пользователя из view (title, author, year) в репо
     @Override
-    public void addBook(int id, String title, String author) {
+    public Book addBook(String title, String author, int publicationYear) {
         // Проверка роли текущего пользователя
         if (activeUser == null || activeUser.getRole() != Role.ADMIN) {
             System.out.println("Добавление новой книги доступно только Администраторам");
-            return;
+            // возвращать null
+            return null;
         }
-        if (title!=null && author!=null) {
-            Book book=new Book(id, title, author);
-            books.add(book);
+        if (title != null && author != null && publicationYear != 0) {
+           Book book = bookRepository.addBook(title,author,publicationYear);
+           return book;
+        } else {
+            System.out.println("Некорректные данные для добавления книги");
+            return null;
+
         }
     }
 
@@ -84,7 +89,7 @@ public class LibraryImpl implements LibraryService{
         }
 
         Book book = bookRepository.getBookById(id);
-        if(id!=0 && book.isAvailable()) {
+        if (id != 0 && book.isAvailable()) {
             activeUser.getUserBooks().add(book);
             book.setAvailable(false);
             return true;
