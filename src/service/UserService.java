@@ -19,6 +19,11 @@ public interface UserService {
 
     boolean loginUser(String email, String password);
 
+    // Метод для установки активного пользователя, без аутентификации
+    void setActiveUser(User user);
+
+    // Показывает Возвращает пользователя, который залогинен в текущий момент
+    User getActiveUser();
 
     MyList<Book> getUsersBooks(String title);
 
