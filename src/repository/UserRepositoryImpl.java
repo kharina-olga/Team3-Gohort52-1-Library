@@ -64,6 +64,7 @@ public class UserRepositoryImpl implements UserRepository {
     // Метод вернет список книг, взятых пользователем
     @Override
     public MyList<Book> getBooksByUser(User user) {
+        //todo user get
         MyList<Book> userBooks = new MyArrayList<>();
 
         for (Book book : bookRepository.getBorrowedBooks()) {

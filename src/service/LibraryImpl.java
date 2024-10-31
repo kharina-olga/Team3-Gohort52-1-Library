@@ -34,6 +34,7 @@ public class LibraryImpl implements LibraryService {
             // возвращать null
             return null;
         }
+
         if (title != null && author != null && publicationYear != 0) {
            Book book = bookRepository.addBook(title,author,publicationYear);
            return book;

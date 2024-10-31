@@ -1,16 +1,18 @@
 package view;
 
-import model.User;
+import service.LibraryService;
 import service.UserService;
 
 import java.util.Scanner;
 
 public class Menu {
     private final UserService service;
+    private final LibraryService serviceBook;
     private final Scanner scanner = new Scanner(System.in);
 
-    public Menu(UserService service) {
+    public Menu(UserService service, LibraryService serviceBook) {
         this.service = service;
+        this.serviceBook = serviceBook;
     }
 
     public void run() {
@@ -63,15 +65,15 @@ public class Menu {
             System.out.println("2. Поиск книги по названию");
             System.out.println("3. Список всех свободных книг");
             System.out.println("4. Список всех книг, находящихся сейчас у читателей");
-
-            //////////////////////
-            System.out.println("4. Взятие книги из библиотеки");
-            System.out.println("5. Возврат книги в библиотеку");
-            System.out.println("6. Добавление книги");
-            // тут меню будет принимать данные от пользователя и передавать в сервис title, author, year
+            //user
+            System.out.println("5. Взятие книги из библиотеки");
+          // тут меню будет принимать данные от пользователя и передавать в сервис title, author, year
+            System.out.println("6. Возврат книги в библиотеку");
+            //admin
+            System.out.println("7. Добавление книги");
+            System.out.println("8. Удаление книги");
 
             System.out.println("0. Вернуться в предыдущее меню");
-
             System.out.println("\nСделайте выбор пункта меню");
             int input = getInt();
             scanner.nextLine();
@@ -107,6 +109,9 @@ public class Menu {
             System.out.println("1. Вход в систему");
             System.out.println("2. Регистрация нового администратора");
             System.out.println("3. Logout");
+            System.out.println("4. Редактирование прав доступа у пользователей");
+            System.out.println("5. Список книг у пользователей и Дата, когда была книга взята");
+
             System.out.println("0. Вернуться в предыдущее меню");
 
             System.out.println("\nСделайте выбор пункта меню");
@@ -114,7 +119,7 @@ public class Menu {
             scanner.nextLine();
             if (input == 0) break;
 
-            handleUserMenuChoice(input);
+            cubAdminMenu(input);
 
         }
     }
@@ -138,6 +143,26 @@ public class Menu {
                 break;
             case 4:
                 System.out.println(" Список всех книг, находящихся сейчас у читателей");
+                //todo
+                waitRead();
+                break;
+            case 5:
+                System.out.println(" Взятие книги из библиотеки");
+                //todo
+                waitRead();
+                break;
+            case 6:
+                System.out.println(" Возврат книги в библиотеку");
+                //todo
+                waitRead();
+                break;
+            case 7:
+                System.out.println(" Добавление книги");
+                //todo
+                waitRead();
+                break;
+            case 8:
+                System.out.println(" Удаление книги");
                 //todo
                 waitRead();
                 break;
@@ -186,6 +211,60 @@ public class Menu {
                 break;
             default:
                 System.out.println("\nНе верный ввод");
+        }
+    }
+
+    private void cubAdminMenu(int input) {
+        switch (input) {
+            case 1:
+                //Авторизацию
+                //Todo написать авторизацию
+                System.out.println("Введите email:");
+                String email = scanner.nextLine();
+
+                System.out.println("Введите пароль");
+                String password = scanner.nextLine();
+                waitRead();
+                break;
+            case 2:
+                // Регистрацию
+                System.out.println("Регистрация нового администратора");
+                System.out.println("Введите email:");
+                String email1 = scanner.nextLine();
+
+                System.out.println("Введите пароль");
+                String password1 = scanner.nextLine();
+
+                //User user = service.registerUser(email, password);
+
+//                if (user != null) {
+//                    System.out.println("Вы успешно зарегистрировались в системе");
+//                } else {
+//                    System.out.println("Регистрация провалена!");
+//                }
+
+                waitRead();
+
+                break;
+            case 3:
+                System.out.println("logout");
+                //service.logout();
+                System.out.println("Вы вышли из системы");
+                waitRead();
+                break;
+            case 4:
+                System.out.println(" Редактирование прав доступа у пользователей");
+                //todo
+                waitRead();
+                break;
+            case 5:
+                System.out.println(" Список книг у пользователей и Дата, когда была книга взята");
+                //todo
+                waitRead();
+                break;
+            default:
+                System.out.println("\nНе верный ввод");
+
         }
     }
 
