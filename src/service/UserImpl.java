@@ -7,7 +7,7 @@ import utils.MyArrayList;
 import utils.MyList;
 import utils.PersonValidator;
 
-public class UserImpl implements UserService{
+public class UserImpl implements UserService {
 
     private final UserRepository repositoryUser;
     private User activeUser; // Хранит текущего авторизованного пользователя, показывает, кто в данный момент авторизован
@@ -56,6 +56,11 @@ public class UserImpl implements UserService{
         return true;
     }
 
+    @Override
+    public void setActiveUser(User user) {
+        this.activeUser = user; // Устанавливаем активного пользователя
+    }
+
     // посмотреть, залогинен ли пользователь
     @Override
     public User getActiveUser() {
@@ -80,7 +85,7 @@ public class UserImpl implements UserService{
     @Override
     public User getUser(String email) {
         MyList<User> allUsers = repositoryUser.getAllUsers();
-        for (User user: allUsers) {
+        for (User user : allUsers) {
             if (user.getEmail().equals(email)) {
                 return user;
             }
@@ -101,13 +106,12 @@ public class UserImpl implements UserService{
     //вывести список всех книг пользователя
     @Override
     public MyList<Book> getAllBooksByUser(User user) {
-        if (user== null) {
+        if (user == null) {
             System.out.println("Пользователь не авторизован!");
             return new MyArrayList<>(); // Возвращаем пустой список, если пользователь не авторизован
         }
         return repositoryUser.getAllBooks(user);
     }
-
 
 
     @Override
