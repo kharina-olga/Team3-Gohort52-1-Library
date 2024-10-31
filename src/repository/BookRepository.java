@@ -29,7 +29,7 @@ public interface BookRepository {
     MyList<Book> getBorrowedBooks();
 
     // Удалить книгу из списка всех книг
-    void deleteBook(Book book);
+    boolean deleteBook(Book book);
 
     // Найти книгу по её названию
     Object getBookByTitle(String title);

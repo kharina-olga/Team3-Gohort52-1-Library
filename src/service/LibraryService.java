@@ -18,4 +18,10 @@ public interface LibraryService {
 
     boolean returnBook(int id);
     void editBook();
+
+    /**
+     * Удалить книгу из списка всех книг
+     * @param
+     */
+    void deleteBook(String title);
 }
