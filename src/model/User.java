@@ -11,10 +11,10 @@ public class User {
     private MyList<Book> borrowedBooks; // Список взятых книг
     private final MyList<Book>  userBooks;
 
-    public User(String email, String password) {
+    public User(String email, String password, Role role) {
         this.email = email;
         this.password = password;
-        this.role = Role.USER;
+        this.role = role;
         this.userBooks = new MyArrayList<>();
     }
 

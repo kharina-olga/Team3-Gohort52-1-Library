@@ -1,5 +1,6 @@
 package service;
 import model.Book;
+import model.User;
 import utils.MyList;
 
 public interface LibraryService {
@@ -24,4 +25,7 @@ public interface LibraryService {
      * @param
      */
     void deleteBook(String title);
+
+    void setActiveUser(User adminUser);
+
 }
