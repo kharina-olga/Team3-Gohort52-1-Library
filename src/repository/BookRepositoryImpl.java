@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookRepositoryImpl implements BookRepository {
 
-    // тут будут хранится все наши машинки. Имитация БД
+    // тут будут хранится все наши книги. Имитация БД
     private final MyList<Book> books;
 
     // объект, отвечающий за генерацию уникальных id
@@ -41,10 +41,10 @@ public class BookRepositoryImpl implements BookRepository {
     public Book addBook(String title, String author, int publicationYear) {
 //currentId.getAndIncrement() -> аналог currentId++; -> получение текущего id и затем увеличение его на +1
         Book book = new Book(currentId.getAndIncrement(), title, author, publicationYear);
-        books.add(book); 
+        books.add(book);
         return book;  // сохранение в "хранилище"
     }
-    
+
 
     @Override
     public Book getBookById(int id) {
@@ -85,8 +85,11 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public void deleteBook(Book book) {
+    public boolean deleteBook(Book book) {
+
         books.remove(book);
+        return true;
+
     }
 
     @Override

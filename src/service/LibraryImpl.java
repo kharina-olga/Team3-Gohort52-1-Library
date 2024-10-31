@@ -143,10 +143,18 @@ public class LibraryImpl implements LibraryService {
     public void editBook() {
 
     }
+
+    @Override
+    public void deleteBook(String title) {
+       // getByAuthor(title);
+        boolean delete;
+     delete = bookRepository.deleteBook(getByAuthor(title));
+
+    }
+
     @Override
     public void setActiveUser(User user) {
         this.activeUser = user; // Устанавливаем переданного пользователя как активного
     }
-
 
 }
