@@ -1,5 +1,6 @@
 package service;
 
+import com.sun.source.tree.UsesTree;
 import model.Book;
 import model.Role;
 import model.User;
@@ -142,4 +143,10 @@ public class LibraryImpl implements LibraryService {
     public void editBook() {
 
     }
+    @Override
+    public void setActiveUser(User user) {
+        this.activeUser = user; // Устанавливаем переданного пользователя как активного
+    }
+
+
 }
