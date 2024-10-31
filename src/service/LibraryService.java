@@ -4,7 +4,7 @@ import utils.MyList;
 
 public interface LibraryService {
 
-    void getByAuthor();
+    Book getByAuthor(String author);
 
     Book addBook(String title, String author, int publicationYear );
 

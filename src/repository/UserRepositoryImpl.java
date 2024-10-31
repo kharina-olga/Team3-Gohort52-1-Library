@@ -12,10 +12,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     private final MyList<User> users;
     private final AtomicInteger usersCount = new AtomicInteger(1);
-    private final BookRepository bookRepository;
 
-    public UserRepositoryImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+
+    public UserRepositoryImpl() {
         users = new MyArrayList<>();
         addUsers();
     }
@@ -65,14 +64,14 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public MyList<Book> getBooksByUser(User user) {
         //todo user get
-        MyList<Book> userBooks = new MyArrayList<>();
+       /* MyList<Book> userBooks = new MyArrayList<>();
 
-        for (Book book : bookRepository.getBorrowedBooks()) {
+        for (Book book : user.getUserBooks()) {
             if (book.getBorrowedBy() != null && book.getBorrowedBy().equals(user)) {
                 userBooks.add(book);
             }
-        }
-        return userBooks;
+        }*/
+        return user.getUserBooks();
     }
 
     @Override

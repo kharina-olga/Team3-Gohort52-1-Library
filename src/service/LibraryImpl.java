@@ -20,9 +20,18 @@ public class LibraryImpl implements LibraryService {
         this.userRepository = userRepository;
     }
 
+    //вернуть книгу по автору
     @Override
-    public void getByAuthor() {
-        System.out.println("Test");
+    public Book getByAuthor(String author) {
+        MyList<Book> allBooks = bookRepository.getAllBooks();
+        if(author!=null) {
+            for (Book book : allBooks) {
+                if (book.getAuthor().equals(author)) {
+                    return book;
+                }
+            }
+        }
+        return null;
     }
 
     // Метод, который принимает данные от пользователя из view (title, author, year) в репо
@@ -69,10 +78,17 @@ public class LibraryImpl implements LibraryService {
 
     }
 
+    //возвращает список всех одолженных на данный момент книг
     @Override
     public MyList<Book> getAllBorrowedBooks() {
-
-        return null;
+        MyList<Book> borrowedBooks = null;
+        MyList<Book> allBooks = bookRepository.getAllBooks();
+        for (Book book: allBooks) {
+            if (!book.isAvailable()) {
+                borrowedBooks.add(book);
+            }
+        }
+        return borrowedBooks;
     }
 
     //одолжить книгу
