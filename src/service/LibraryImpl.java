@@ -33,7 +33,7 @@ public class LibraryImpl implements LibraryService{
             return;
         }
         if (title!=null && author!=null) {
-            Book book=new Book(id, title, author);
+            Book book = new Book(id, title, author);
             books.add(book);
         }
     }
@@ -41,7 +41,7 @@ public class LibraryImpl implements LibraryService{
     @Override
     public MyList<Book> getAllBooks() {
 
-        return null;
+        return bookRepository.getAllBooks();
     }
 
     @Override
