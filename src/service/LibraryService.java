@@ -1,5 +1,6 @@
 package service;
 import model.Book;
+import model.User;
 import utils.MyList;
 
 public interface LibraryService {
@@ -18,4 +19,6 @@ public interface LibraryService {
 
     boolean returnBook(int id);
     void editBook();
+
+    void setActiveUser(User adminUser);
 }
