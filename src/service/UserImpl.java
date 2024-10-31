@@ -81,7 +81,7 @@ public class UserImpl implements UserService {
         return filteredUsers; // Возвращаем отфильтрованный список
     }
 
-    //возвращает юзера по имейлу
+  /*  //возвращает юзера по имейлу
     @Override
     public User getUser(String email) {
         MyList<User> allUsers = repositoryUser.getAllUsers();
@@ -91,6 +91,12 @@ public class UserImpl implements UserService {
             }
         }
         return null;
+    }*/
+
+    // Возвращаем пользователя по email
+    @Override
+    public User getUser(String email) {
+        return repositoryUser.getUserByEmail(email);
     }
 
 
@@ -100,17 +106,17 @@ public class UserImpl implements UserService {
             System.out.println("Пользователь не авторизован!");
             return new MyArrayList<>(); // Возвращаем пустой список, если пользователь не авторизован
         }
-        return repositoryUser.getBooksByUser(activeUser);
+        return repositoryUser.getBooksByUser(activeUser); // // Возвращаем книги для активного пользователя
     }
 
     //вывести список всех книг пользователя
     @Override
     public MyList<Book> getAllBooksByUser(User user) {
-        if (user == null) {
+        if (activeUser  == null) {
             System.out.println("Пользователь не авторизован!");
             return new MyArrayList<>(); // Возвращаем пустой список, если пользователь не авторизован
         }
-        return repositoryUser.getAllBooks(user);
+        return repositoryUser.getBooksByUser(activeUser);
     }
 
 
