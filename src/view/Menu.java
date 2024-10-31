@@ -62,11 +62,11 @@ public class Menu {
         while (true) {
             System.out.println(Color.GREEN + "Меню библиотеки" + Color.RESET);
             System.out.println("1. Список всех книг");
-            System.out.println("2. Поиск книги по названию");
+            System.out.println("2. Поиск книги по автору");
             System.out.println("3. Список всех свободных книг");
             System.out.println("4. Список всех книг, находящихся сейчас у читателей");
             //user
-            System.out.println("5. Взятие книги из библиотеки");
+            System.out.println("5. Взятие книги из библиотеки (одолжить)");
           // тут меню будет принимать данные от пользователя и передавать в сервис title, author, year
             System.out.println("6. Возврат книги в библиотеку");
             //admin
@@ -127,38 +127,62 @@ public class Menu {
     private void cubBookMenu(int input) {
         switch (input) {
             case 1:
-                System.out.println("1. Список всех книг");
-                //todo
+                System.out.println(" Список всех книг");
+                serviceBook.getAllBooks();
                 waitRead();
                 break;
             case 2:
-                System.out.println("Поиск книги по названию");
+                System.out.println("Поиск книги по автору");
+
+                System.out.println("Введите автора книги");
+                String bookName = scanner.nextLine();
                 //todo
+                //вернуть книгу по автору
+                serviceBook.getByAuthor(bookName);
                 waitRead();
                 break;
             case 3:
                 System.out.println(" Список всех свободных книг");
-                //todo
+                serviceBook.getAllFreeBooks();
                 waitRead();
                 break;
             case 4:
                 System.out.println(" Список всех книг, находящихся сейчас у читателей");
-                //todo
+                serviceBook.getAllBorrowedBooks();
                 waitRead();
                 break;
             case 5:
                 System.out.println(" Взятие книги из библиотеки");
-                //todo
+                System.out.println("Введите id книги");
+                int bookBorrow = getInt();
+                scanner.nextLine();
+
+                serviceBook.borrowBook(bookBorrow);
                 waitRead();
                 break;
             case 6:
                 System.out.println(" Возврат книги в библиотеку");
-                //todo
+
+                System.out.println("Введите id книги");
+                int bookId = getInt();
+                scanner.nextLine();
+
+                serviceBook.returnBook(bookId);
                 waitRead();
                 break;
             case 7:
                 System.out.println(" Добавление книги");
-                //todo
+
+                System.out.println("Введите название книги");
+                String bookTitle = scanner.nextLine();
+
+                System.out.println("Введите автора книги");
+                String bookAuthor = scanner.nextLine();
+
+                System.out.println("Введите год книги");
+                int bookYear = getInt();
+                scanner.nextLine();
+                serviceBook.addBook(bookTitle,bookAuthor,bookYear);
                 waitRead();
                 break;
             case 8:
@@ -175,12 +199,13 @@ public class Menu {
         switch (input) {
             case 1:
                 //Авторизацию
-                //Todo написать авторизацию
                 System.out.println("Введите email:");
                 String email = scanner.nextLine();
 
                 System.out.println("Введите пароль");
                 String password = scanner.nextLine();
+
+                service.loginUser(email,password);
                 waitRead();
                 break;
             case 2:
@@ -192,20 +217,13 @@ public class Menu {
                 System.out.println("Введите пароль");
                 String password1 = scanner.nextLine();
 
-                //User user = service.registerUser(email, password);
-
-//                if (user != null) {
-//                    System.out.println("Вы успешно зарегистрировались в системе");
-//                } else {
-//                    System.out.println("Регистрация провалена!");
-//                }
-
+                service.registerUser(email1,password1);
                 waitRead();
 
                 break;
             case 3:
                 System.out.println("logout");
-                //service.logout();
+                service.logout();
                 System.out.println("Вы вышли из системы");
                 waitRead();
                 break;
@@ -235,14 +253,6 @@ public class Menu {
                 System.out.println("Введите пароль");
                 String password1 = scanner.nextLine();
 
-                //User user = service.registerUser(email, password);
-
-//                if (user != null) {
-//                    System.out.println("Вы успешно зарегистрировались в системе");
-//                } else {
-//                    System.out.println("Регистрация провалена!");
-//                }
-
                 waitRead();
 
                 break;
@@ -260,6 +270,7 @@ public class Menu {
             case 5:
                 System.out.println(" Список книг у пользователей и Дата, когда была книга взята");
                 //todo
+               // service.getAllBooksByUser();
                 waitRead();
                 break;
             default:
