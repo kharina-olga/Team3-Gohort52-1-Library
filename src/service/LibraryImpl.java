@@ -5,19 +5,19 @@ import model.Role;
 import model.User;
 import repository.BookRepository;
 import repository.UserRepository;
+import utils.MyArrayList;
 import utils.MyList;
 
-public class LibraryImpl implements LibraryService{
+public class LibraryImpl implements LibraryService {
 
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
-    private MyList<Book> books;
-
     private User activeUser;
+
     public LibraryImpl(BookRepository bookRepository, UserRepository userRepository) {
-        this.bookRepository=bookRepository;
-        this.userRepository=userRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -25,29 +25,48 @@ public class LibraryImpl implements LibraryService{
         System.out.println("Test");
     }
 
+    // Метод, который принимает данные от пользователя из view (title, author, year) в репо
     @Override
-    public void addBook(int id, String title, String author) {
+    public Book addBook(String title, String author, int publicationYear) {
         // Проверка роли текущего пользователя
         if (activeUser == null || activeUser.getRole() != Role.ADMIN) {
             System.out.println("Добавление новой книги доступно только Администраторам");
-            return;
+            // возвращать null
+            return null;
         }
-        if (title!=null && author!=null) {
-            Book book = new Book(id, title, author);
-            books.add(book);
+
+        if (title != null && author != null && publicationYear != 0) {
+           Book book = bookRepository.addBook(title,author,publicationYear);
+           return book;
+        } else {
+            System.out.println("Некорректные данные для добавления книги");
+            return null;
+
         }
     }
 
+    // Возвращаем все книги из репозитория
     @Override
     public MyList<Book> getAllBooks() {
-
         return bookRepository.getAllBooks();
+
     }
 
+    // Получаем все книги из репозитория
     @Override
     public MyList<Book> getAllFreeBooks() {
+        MyList<Book> allBooks = bookRepository.getAllBooks();
+        MyList<Book> freeBooks = new MyArrayList<>();
 
-        return null;
+        // Проходим по каждой книге и добавляем только доступные книги в новый список
+        for (Book book : allBooks) {
+            if (book.isAvailable()) {  // Проверяем, доступна ли книга
+                freeBooks.add(book);
+            }
+        }
+
+        return freeBooks; // Возвращаем список свободных книг
+
     }
 
     @Override
@@ -56,6 +75,7 @@ public class LibraryImpl implements LibraryService{
         return null;
     }
 
+    //одолжить книгу
     @Override
     public boolean borrowBook(int id) {
         // Проверка, что пользователь авторизирован в системе
@@ -70,17 +90,36 @@ public class LibraryImpl implements LibraryService{
         }
 
         Book book = bookRepository.getBookById(id);
-        if(id!=0 && book.isAvailable()) {
+        if (id != 0 && book.isAvailable()) {
             activeUser.getUserBooks().add(book);
+            book.setAvailable(false);
+            return true;
+        }
+
+        return false;
+    }
+
+    //вернуть книгу
+    @Override
+    public boolean returnBook(int id) {
+        // Проверка, что пользователь авторизирован в системе
+        if (activeUser == null) {
+            System.out.println("Выполните вход в систему");
             return false;
         }
 
-        return true;
-    }
+        if (activeUser.getRole() == Role.BLOCKED) {
+            System.out.println("Ваш аккаунт заблокирован! Обратитесь в службу поддержки");
+            return false;
+        }
 
-    @Override
-    public void returnBook() {
-
+        Book book = bookRepository.getBookById(id);
+        if(id!=0 && activeUser.getUserBooks().contains(book)) {
+            activeUser.getUserBooks().remove(book);
+            book.setAvailable(true);
+            return true;
+        }
+        return false;
     }
 
     @Override

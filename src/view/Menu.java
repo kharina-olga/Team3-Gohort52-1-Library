@@ -67,6 +67,7 @@ public class Menu {
             System.out.println("4. Список всех книг, находящихся сейчас у читателей");
             //user
             System.out.println("5. Взятие книги из библиотеки");
+          // тут меню будет принимать данные от пользователя и передавать в сервис title, author, year
             System.out.println("6. Возврат книги в библиотеку");
             //admin
             System.out.println("7. Добавление книги");

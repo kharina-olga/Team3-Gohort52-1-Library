@@ -88,13 +88,14 @@ public class UserImpl implements UserService{
         return repositoryUser.getBooksByUser(activeUser);
     }
 
+    //вывести список всех книг пользователя
     @Override
-    public MyList<Book> getAllBooksByUser() {
-        if (activeUser == null) {
+    public MyList<Book> getAllBooksByUser(User user) {
+        if (user== null) {
             System.out.println("Пользователь не авторизован!");
             return new MyArrayList<>(); // Возвращаем пустой список, если пользователь не авторизован
         }
-        return repositoryUser.getAllBooks(activeUser);
+        return repositoryUser.getAllBooks(user);
     }
 
 

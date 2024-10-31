@@ -36,10 +36,15 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
 
+    // метод принимает данные из слоя service, добавляет сгенерированный id и создает объект книга
     @Override
-    public void addBook(int id, String title, String author, int publicationYear) {
-
+    public Book addBook(String title, String author, int publicationYear) {
+//currentId.getAndIncrement() -> аналог currentId++; -> получение текущего id и затем увеличение его на +1
+        Book book = new Book(currentId.getAndIncrement(), title, author, publicationYear);
+        books.add(book); 
+        return book;  // сохранение в "хранилище"
     }
+    
 
     @Override
     public Book getBookById(int id) {
