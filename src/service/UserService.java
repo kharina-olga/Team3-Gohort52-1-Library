@@ -14,6 +14,7 @@ public interface UserService {
 
     boolean loginUser(String email, String password);
 
+    User getActiveUser(); // Возвращает пользователя, который залогинен в текущий момент
 
     MyList<Book> getUsersBooks(String title);
 

@@ -56,6 +56,12 @@ public class UserImpl implements UserService{
         return true;
     }
 
+    // посмотреть, залогинен ли пользователь
+    @Override
+    public User getActiveUser() {
+        return activeUser;
+    }
+
     @Override
     public MyList<User> getUsers(String email) {
         MyList<User> allUsers = repositoryUser.getAllUsers(); // Получаем всех пользователей
