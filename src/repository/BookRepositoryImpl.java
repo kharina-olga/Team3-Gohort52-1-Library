@@ -83,6 +83,17 @@ public class BookRepositoryImpl implements BookRepository {
     public void deleteBook(Book book) {
         books.remove(book);
     }
+
+    @Override
+    public Object getBookByTitle(String title) {
+
+        for (Book book : books) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                return book;
+            }
+        }
+        return "Книга с названием '" + title + "' не найдена";
+    }
 }
 
 
