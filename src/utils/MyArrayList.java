@@ -188,6 +188,17 @@ public class MyArrayList<T> implements MyList<T>, Iterable<T> {
 
     }
 
+    @Override
+    public void clear() {
+        // Устанавливаем все элементы массива в null, чтобы освободить память
+        for (int i = 0; i < cursor; i++) {
+            array[i] = null;
+        }
+        // Обнуляем cursor, чтобы обозначить, что массив пустой
+        cursor = 0;
+
+    }
+
     // Является ли коллекция пустой
     @Override
     public boolean isEmpty() {
