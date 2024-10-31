@@ -37,7 +37,7 @@ class LibraryImplTests {
     @BeforeEach
     void setUp() {
         bookRepository = new BookRepositoryImpl();
-        libraryService = new LibraryImpl(bookRepository, null); // userRepository не используется
+        libraryService = new LibraryImpl(bookRepository); // userRepository не используется
 
         adminUser = new User(ADMIN_EMAIL, ADMIN_PASSWORD, Role.ADMIN);
         regularUser = new User(USER_EMAIL, USER_PASSWORD, Role.USER);
