@@ -16,6 +16,6 @@ public interface LibraryService {
 
     boolean borrowBook(int id);
 
-    void returnBook();
+    boolean returnBook(int id);
     void editBook();
 }

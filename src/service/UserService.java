@@ -18,7 +18,7 @@ public interface UserService {
     MyList<Book> getUsersBooks(String title);
 
 
-    MyList<Book> getAllBooksByUser();
+    MyList<Book> getAllBooksByUser(User user);
 
     void logout();
 
