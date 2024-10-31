@@ -79,5 +79,10 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
+    @Override
+    public void clearAllUsers() {
+        users.clear(); // Удаляет всех пользователей из коллекции
+    }
+
 
 }
