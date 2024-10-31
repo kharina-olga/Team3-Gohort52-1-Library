@@ -12,8 +12,6 @@ public class LibraryImpl implements LibraryService {
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
-    private MyList<Book> books;
-
     private User activeUser;
 
     public LibraryImpl(BookRepository bookRepository, UserRepository userRepository) {
@@ -26,18 +24,22 @@ public class LibraryImpl implements LibraryService {
         System.out.println("Test");
     }
 
+    // Метод, который принимает данные от пользователя из view (title, author, year) в репо
     @Override
-    public void addBook(int id, String title, String author, int publicationYear) {
+    public Book addBook(String title, String author, int publicationYear) {
         // Проверка роли текущего пользователя
         if (activeUser == null || activeUser.getRole() != Role.ADMIN) {
             System.out.println("Добавление новой книги доступно только Администраторам");
-            return;
+            // возвращать null
+            return null;
         }
         if (title != null && author != null && publicationYear != 0) {
-            Book book = new Book(id, title, author, publicationYear);
-            books.add(book);
+           Book book = bookRepository.addBook(title,author,publicationYear);
+           return book;
         } else {
             System.out.println("Некорректные данные для добавления книги");
+            return null;
+
         }
     }
 
