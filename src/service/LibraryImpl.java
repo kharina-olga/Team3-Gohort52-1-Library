@@ -5,6 +5,7 @@ import model.Role;
 import model.User;
 import repository.BookRepository;
 import repository.UserRepository;
+import utils.MyArrayList;
 import utils.MyList;
 
 public class LibraryImpl implements LibraryService{
@@ -38,16 +39,28 @@ public class LibraryImpl implements LibraryService{
         }
     }
 
+    // Возвращаем все книги из репозитория
     @Override
     public MyList<Book> getAllBooks() {
+        return bookRepository.getAllBooks();
 
-        return null;
     }
 
+    // Получаем все книги из репозитория
     @Override
     public MyList<Book> getAllFreeBooks() {
+        MyList<Book> allBooks = bookRepository.getAllBooks();
+        MyList<Book> freeBooks = new MyArrayList<>();
 
-        return null;
+        // Проходим по каждой книге и добавляем только доступные книги в новый список
+        for (Book book : allBooks) {
+            if (book.isAvailable()) {  // Проверяем, доступна ли книга
+                freeBooks.add(book);
+            }
+        }
+
+        return freeBooks; // Возвращаем список свободных книг
+
     }
 
     @Override
