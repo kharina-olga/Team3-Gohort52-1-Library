@@ -161,7 +161,6 @@ public class Menu {
 
                 for (Book book : serviceBook.getAllFreeBooks())
                     System.out.println("\n" + book);
-                waitRead();
 
                 System.out.println("Введите id книги");
                 int bookBorrow = getInt();
@@ -200,6 +199,13 @@ public class Menu {
                 break;
             case 8:
                 System.out.println(" Удаление книги");
+                for (Book book : serviceBook.getAllFreeBooks())
+                    System.out.println("\n" + book);
+
+                System.out.println("Введите id книги");
+                int bookId1 = getInt();
+                scanner.nextLine();
+                serviceBook.deleteBook(bookId1);
                 //todo
                 waitRead();
                 break;

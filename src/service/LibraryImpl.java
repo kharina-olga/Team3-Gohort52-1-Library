@@ -37,11 +37,11 @@ public class LibraryImpl implements LibraryService {
     @Override
     public Book addBook(String title, String author, int publicationYear) {
         // Проверка роли текущего пользователя
-        if (activeUser == null || activeUser.getRole() != Role.ADMIN) {
-            System.out.println("Добавление новой книги доступно только Администраторам");
-            // возвращать null
-            return null;
-        }
+//        if (activeUser == null || activeUser.getRole() != Role.ADMIN) {
+//            System.out.println("Добавление новой книги доступно только Администраторам");
+//            // возвращать null
+//            return null;
+//        }
 
         if (title != null && author != null && publicationYear != 0) {
             Book book = bookRepository.addBook(title, author, publicationYear);
@@ -94,19 +94,19 @@ public class LibraryImpl implements LibraryService {
     @Override
     public boolean borrowBook(int id) {
         // Проверка, что пользователь авторизирован в системе
-        if (activeUser == null) {
-            System.out.println("Выполните вход в систему");
-            return false;
-        }
-
-        if (activeUser.getRole() == Role.BLOCKED) {
-            System.out.println("Ваш аккаунт заблокирован! Обратитесь в службу поддержки");
-            return false;
-        }
+//        if (activeUser == null) {
+//            System.out.println("Выполните вход в систему");
+//            return false;
+//        }
+//
+//        if (activeUser.getRole() == Role.BLOCKED) {
+//            System.out.println("Ваш аккаунт заблокирован! Обратитесь в службу поддержки");
+//            return false;
+//        }
 
         Book book = bookRepository.getBookById(id);
         if (id != 0 && book.isAvailable()) {
-            activeUser.getUserBooks().add(book);
+            //activeUser.getUserBooks().add(book);
             book.setAvailable(false);
             return true;
         }
@@ -118,19 +118,19 @@ public class LibraryImpl implements LibraryService {
     @Override
     public boolean returnBook(int id) {
         // Проверка, что пользователь авторизирован в системе
-        if (activeUser == null) {
-            System.out.println("Выполните вход в систему");
-            return false;
-        }
-
-        if (activeUser.getRole() == Role.BLOCKED) {
-            System.out.println("Ваш аккаунт заблокирован! Обратитесь в службу поддержки");
-            return false;
-        }
+//        if (activeUser == null) {
+//            System.out.println("Выполните вход в систему");
+//            return false;
+//        }
+//
+//        if (activeUser.getRole() == Role.BLOCKED) {
+//            System.out.println("Ваш аккаунт заблокирован! Обратитесь в службу поддержки");
+//            return false;
+//        }
 
         Book book = bookRepository.getBookById(id);
         if (id != 0 && activeUser.getUserBooks().contains(book)) {
-            activeUser.getUserBooks().remove(book);
+           // activeUser.getUserBooks().remove(book);
             book.setAvailable(true);
             return true;
         }
@@ -143,10 +143,12 @@ public class LibraryImpl implements LibraryService {
     }
 
     @Override
-    public void deleteBook(String title) {
-        // getByAuthor(title);
-        boolean delete;
-        delete = bookRepository.deleteBook(getByAuthor(title));
+    public void deleteBook(int id) {
+        Book book = bookRepository.getBookById(id);
+        if (id != 0 && book.isAvailable()) {
+            bookRepository.deleteBook(book);
+
+        }else System.out.println("Такой книги нет!");
 
     }
 
