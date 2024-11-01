@@ -24,7 +24,7 @@ public interface LibraryService {
      * Удалить книгу из списка всех книг
      * @param
      */
-    void deleteBook(String title);
+    void deleteBook(int id);
 
     void setActiveUser(User adminUser);
 
