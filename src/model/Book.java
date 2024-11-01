@@ -41,11 +41,11 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", isAvailable=" + isAvailable +
+        return "Книга {" +
+                "ID: " + id +
+                ", Название: '" + title + '\'' +
+                ", Автор: '" + author + '\'' +
+                ", Доступность: " + (isAvailable ? "Доступна" : "Занята") +
                 '}';
     }
 
