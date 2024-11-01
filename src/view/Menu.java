@@ -146,21 +146,29 @@ public class Menu {
                 break;
             case 3:
                 System.out.println(" Список всех свободных книг");
-                serviceBook.getAllFreeBooks();
+                for (Book book : serviceBook.getAllFreeBooks())
+                    System.out.println("\n" + book);
                 waitRead();
                 break;
             case 4:
                 System.out.println(" Список всех книг, находящихся сейчас у читателей");
-                serviceBook.getAllBorrowedBooks();
+                for (Book book : serviceBook.getAllBorrowedBooks())
+                    System.out.println("\n" + book);
                 waitRead();
                 break;
             case 5:
                 System.out.println(" Взятие книги из библиотеки");
+
+                for (Book book : serviceBook.getAllFreeBooks())
+                    System.out.println("\n" + book);
+                waitRead();
+
                 System.out.println("Введите id книги");
                 int bookBorrow = getInt();
                 scanner.nextLine();
+                if(!serviceBook.borrowBook(bookBorrow)) System.out.println("Такой книги нет в библиотеке");
+                else System.out.println("Взятие книги успешно");
 
-                serviceBook.borrowBook(bookBorrow);
                 waitRead();
                 break;
             case 6:
@@ -170,9 +178,11 @@ public class Menu {
                 int bookId = getInt();
                 scanner.nextLine();
 
-                serviceBook.returnBook(bookId);
+                if(!serviceBook.returnBook(bookId)) System.out.println("Такой книги нет в библиотеке");
+                else System.out.println("Книга вернулась в библиотеку");
                 waitRead();
                 break;
+
             case 7:
                 System.out.println(" Добавление книги");
 
@@ -185,7 +195,7 @@ public class Menu {
                 System.out.println("Введите год книги");
                 int bookYear = getInt();
                 scanner.nextLine();
-                serviceBook.addBook(bookTitle, bookAuthor, bookYear);
+                if(serviceBook.addBook(bookTitle, bookAuthor, bookYear) == null) System.out.println("Что-то пошло не так");
                 waitRead();
                 break;
             case 8:
