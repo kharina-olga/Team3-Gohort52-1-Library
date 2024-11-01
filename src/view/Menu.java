@@ -1,9 +1,11 @@
 package view;
 
+import model.Book;
 import service.LibraryService;
 import service.UserService;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Menu {
     private final UserService service;
@@ -50,7 +52,7 @@ public class Menu {
                 showUserMenu();
                 break;
             case 3:
-                 showAdminMenu();
+                showAdminMenu();
                 break;
             default:
                 System.out.println(Color.RED + "Сделайте корректный выбор\n" + Color.RESET);
@@ -67,7 +69,7 @@ public class Menu {
             System.out.println("4. Список всех книг, находящихся сейчас у читателей");
             //user
             System.out.println("5. Взятие книги из библиотеки (одолжить)");
-          // тут меню будет принимать данные от пользователя и передавать в сервис title, author, year
+            // тут меню будет принимать данные от пользователя и передавать в сервис title, author, year
             System.out.println("6. Возврат книги в библиотеку");
             //admin
             System.out.println("7. Добавление книги");
@@ -127,10 +129,11 @@ public class Menu {
     private void cubBookMenu(int input) {
         switch (input) {
             case 1:
-                System.out.println(" Список всех книг");
-                serviceBook.getAllBooks();
+                for (Book book : serviceBook.getAllBooks())
+                    System.out.println("\n" + book);
                 waitRead();
                 break;
+
             case 2:
                 System.out.println("Поиск книги по автору");
 
@@ -138,7 +141,7 @@ public class Menu {
                 String bookName = scanner.nextLine();
                 //todo
                 //вернуть книгу по автору
-                serviceBook.getByAuthor(bookName);
+                System.out.println(serviceBook.getByAuthor(bookName));;
                 waitRead();
                 break;
             case 3:
@@ -182,7 +185,7 @@ public class Menu {
                 System.out.println("Введите год книги");
                 int bookYear = getInt();
                 scanner.nextLine();
-                serviceBook.addBook(bookTitle,bookAuthor,bookYear);
+                serviceBook.addBook(bookTitle, bookAuthor, bookYear);
                 waitRead();
                 break;
             case 8:
@@ -205,7 +208,7 @@ public class Menu {
                 System.out.println("Введите пароль");
                 String password = scanner.nextLine();
 
-                service.loginUser(email,password);
+                service.loginUser(email, password);
                 waitRead();
                 break;
             case 2:
@@ -217,7 +220,7 @@ public class Menu {
                 System.out.println("Введите пароль");
                 String password1 = scanner.nextLine();
 
-                service.registerUser(email1,password1);
+                service.registerUser(email1, password1);
                 waitRead();
 
                 break;
@@ -270,7 +273,7 @@ public class Menu {
             case 5:
                 System.out.println(" Список книг у пользователей и Дата, когда была книга взята");
                 //todo
-               // service.getAllBooksByUser();
+                // service.getAllBooksByUser();
                 waitRead();
                 break;
             default:
@@ -299,4 +302,6 @@ public class Menu {
         }
         return num;
     }
+
+
 }
