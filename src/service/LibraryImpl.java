@@ -80,7 +80,7 @@ public class LibraryImpl implements LibraryService {
     //возвращает список всех одолженных на данный момент книг
     @Override
     public MyList<Book> getAllBorrowedBooks() {
-        MyList<Book> borrowedBooks = null;
+        MyList<Book> borrowedBooks=new MyArrayList<>();
         MyList<Book> allBooks = bookRepository.getAllBooks();
         for (Book book : allBooks) {
             if (!book.isAvailable()) {
@@ -111,7 +111,7 @@ public class LibraryImpl implements LibraryService {
             return true;
         }
 
-        return false;
+        return true;
     }
 
     //вернуть книгу
