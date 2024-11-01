@@ -12,20 +12,18 @@ import utils.MyList;
 public class LibraryImpl implements LibraryService {
 
     private final BookRepository bookRepository;
-    private final UserRepository userRepository;
 
     private User activeUser;
 
-    public LibraryImpl(BookRepository bookRepository, UserRepository userRepository) {
+    public LibraryImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.userRepository = userRepository;
     }
 
     //вернуть книгу по автору
     @Override
     public Book getByAuthor(String author) {
         MyList<Book> allBooks = bookRepository.getAllBooks();
-        if(author!=null) {
+        if (author != null) {
             for (Book book : allBooks) {
                 if (book.getAuthor().equals(author)) {
                     return book;
@@ -46,8 +44,8 @@ public class LibraryImpl implements LibraryService {
         }
 
         if (title != null && author != null && publicationYear != 0) {
-           Book book = bookRepository.addBook(title,author,publicationYear);
-           return book;
+            Book book = bookRepository.addBook(title, author, publicationYear);
+            return book;
         } else {
             System.out.println("Некорректные данные для добавления книги");
             return null;
@@ -84,7 +82,7 @@ public class LibraryImpl implements LibraryService {
     public MyList<Book> getAllBorrowedBooks() {
         MyList<Book> borrowedBooks = null;
         MyList<Book> allBooks = bookRepository.getAllBooks();
-        for (Book book: allBooks) {
+        for (Book book : allBooks) {
             if (!book.isAvailable()) {
                 borrowedBooks.add(book);
             }
@@ -131,7 +129,7 @@ public class LibraryImpl implements LibraryService {
         }
 
         Book book = bookRepository.getBookById(id);
-        if(id!=0 && activeUser.getUserBooks().contains(book)) {
+        if (id != 0 && activeUser.getUserBooks().contains(book)) {
             activeUser.getUserBooks().remove(book);
             book.setAvailable(true);
             return true;
@@ -146,9 +144,9 @@ public class LibraryImpl implements LibraryService {
 
     @Override
     public void deleteBook(String title) {
-       // getByAuthor(title);
+        // getByAuthor(title);
         boolean delete;
-     delete = bookRepository.deleteBook(getByAuthor(title));
+        delete = bookRepository.deleteBook(getByAuthor(title));
 
     }
 

@@ -17,7 +17,7 @@ public class MainApp {
         UserRepository userRepository = new UserRepositoryImpl();
 
         UserService serviceUser = new UserImpl(userRepository);
-        LibraryService serviceBook = new LibraryImpl(bookRepository,userRepository);
+        LibraryService serviceBook = new LibraryImpl(bookRepository);
 
         Menu menu = new Menu(serviceUser,serviceBook);
 
